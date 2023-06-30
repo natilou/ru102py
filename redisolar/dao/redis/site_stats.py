@@ -60,10 +60,15 @@ class SiteStatsDaoRedis(SiteStatsDaoBase, RedisDaoBase):
             pipeline = self.redis.pipeline()
             execute = True
 
+        reporting_time = datetime.datetime.utcnow().isoformat()
+        pipeline.hset(key, SiteStats.LAST_REPORTING_TIME, reporting_time)
+        pipeline.hincrby(key, SiteStats.COUNT, 1)
+        pipeline.expire(key, WEEK_SECONDS)
+
         self.compare_and_update_script.update_if_greater(
             pipeline,
             key,
-            SiteStats.MAX_CAPACITY,
+            SiteStats.MAX_WH,
             meter_reading.wh_generated,
         )
 
