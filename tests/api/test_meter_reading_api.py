@@ -18,7 +18,6 @@ def readings():
     ]
 
 
-@pytest.mark.skip("Uncomment for challenge #6")
 def test_global_readings_get(client, readings):
     data = MeterReadingsSchema().dump({"readings": readings})
     readings_post = client.post('/meter_readings', json=data)
@@ -29,7 +28,6 @@ def test_global_readings_get(client, readings):
     assert len(readings_get.json['readings']) == 10
 
 
-@pytest.mark.skip("Uncomment for challenge #6")
 def test_global_readings_get_custom_count(client, readings):
     data = MeterReadingsSchema().dump({"readings": readings})
     readings_post = client.post('/meter_readings', json=data)
@@ -40,7 +38,6 @@ def test_global_readings_get_custom_count(client, readings):
     assert readings_get.json == MeterReadingsSchema().dump({"readings": [readings[9]]})
 
 
-@pytest.mark.skip("Uncomment for challenge #6")
 def test_site_readings_get(client, readings):
     data = MeterReadingsSchema().dump({"readings": readings})
     readings_post = client.post('/meter_readings', json=data)
@@ -54,7 +51,6 @@ def test_site_readings_get(client, readings):
     assert readings_json[0]['site_id'] == 2
 
 
-@pytest.mark.skip("Uncomment for challenge #6")
 def test_site_readings_get_custom_count(client):
     now = datetime.datetime.utcnow()
     readings = [
