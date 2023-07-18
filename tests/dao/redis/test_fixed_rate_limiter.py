@@ -1,5 +1,3 @@
-import pytest
-
 from redisolar.dao.redis.fixed_rate_limiter import FixedRateLimiter
 from redisolar.dao.redis.fixed_rate_limiter import MinuteInterval
 from redisolar.dao.redis.fixed_rate_limiter import RateLimitExceededException
